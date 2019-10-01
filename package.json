@@ -1,9 +1,12 @@
 {
-  "name": "insight-bitcore-api-dash",
+  "name": "insight-api-npccoin",
   "description": "An open-source bitcoin blockchain API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the bitcoin network and build your own services with it.",
-  "version": "0.2.19",
-  "repository": "git://github.com/bitpay/insight-api.git",
+  "version": "0.2.20",
+  "repository": "git://github.com/npccoin/insight-api-npccoin.git",
   "contributors": [{
+    "name": "Estilodevida",
+    "email": "estilodevidanpc@gmail.com"
+  }, {
     "name": "Matias Alejo Garcia",
     "email": "ematiu@gmail.com"
   }, {
@@ -23,9 +26,9 @@
     "email": "jungans@gmail.com"
   }],
   "bugs": {
-    "url": "https://github.com/bitpay/insight-api/issues"
+    "url": "https://github.com/npccoin/insight-api-npccoin/issues"
   },
-  "homepage": "https://github.com/bitpay/insight-api",
+  "homepage": "https://github.com/npccoin/insight-api-npccoin",
   "license": "MIT",
   "keywords": [
     "insight",
@@ -35,6 +38,8 @@
     "blockchain api",
     "json",
     "bitcore"
+    "npccoin"
+    "npc"
   ],
   "engines": {
     "node": "*"

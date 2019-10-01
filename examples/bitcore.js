@@ -12054,12 +12054,12 @@ var hex = function(hex) {
 
 exports.livenet = {
   name: 'livenet',
-  magic: hex('f9beb4d9'),
+  magic: hex('3416d9f3'),
   addressVersion: 0x00,
   privKeyVersion: 128,
   P2SHVersion: 5,
-  hkeyPublicVersion: 0x0488b21e,
-  hkeyPrivateVersion: 0x0488ade4,
+  hkeyPublicVersion: 0x22d2533,
+  hkeyPrivateVersion: 0x221312b,
   genesisBlock: {
     hash: hex('6FE28C0AB6F1B372C1A6A246AE63F74F931E8365E15A089C68D6190000000000'),
     merkle_root: hex('3BA3EDFD7A7B12B27AC72C3E67768F617FC81BC3888A51323A9FB8AA4B1E5E4A'),
@@ -12071,14 +12071,10 @@ exports.livenet = {
     bits: 486604799,
   },
   dnsSeeds: [
-    'seed.bitcoin.sipa.be',
-    'dnsseed.bluematt.me',
-    'dnsseed.bitcoin.dashjr.org',
-    'seed.bitcoinstats.com',
-    'seed.bitnodes.io',
-    'bitseed.xf2.org'
+    'nodo1.npccoin.com',
+    'nodo2.npccoin.com''
   ],
-  defaultClientPort: 8333
+  defaultClientPort: 7168
 };
 
 exports.mainnet = exports.livenet;

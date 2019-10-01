@@ -46,7 +46,7 @@ exports.index = function(req, res) {
     timestamp = currentTime;
 
     _request('https://api.exmo.com/v1/ticker/', function(err, data) {
-      if (!err) exmoRate = parseFloat(JSON.parse(data).DASH_USD.avg);
+      if (!err) exmoRate = parseFloat(JSON.parse(data).NPC_USD.avg);
     });
   }
 
@@ -56,7 +56,7 @@ exports.index = function(req, res) {
     _request('http://www.coincap.io/front', function(err, data) {
       if (!err) coincapFront = JSON.parse(data);
       for (var i=0; i< coincapFront.length; i++) {
-        if ( coincapFront[i].short == 'DASH' ) coincapRate = parseFloat(coincapFront[i].price);
+        if ( coincapFront[i].short == 'NPC' ) coincapRate = parseFloat(coincapFront[i].price);
       }
     });
   }

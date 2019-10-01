@@ -1,10 +1,10 @@
 
 # NOTE:
-This version of Insights has been modified to work with pivxd and requires a running instance of pivxd to connect to. This does not necessarily have to be local but if it is not you need to specify the BITCOIND_HOST environment variable as such. It also runs on port 8015 by default, should you wish the change the running port you may do so in config/config.js on the 'port' variable for which network you are using. 
+This version of Insights has been modified to work with npccoind and requires a running instance of npccoind to connect to. This does not necessarily have to be local but if it is not you need to specify the BITCOIND_HOST environment variable as such. It also runs on port 8015 by default, should you wish the change the running port you may do so in config/config.js on the 'port' variable for which network you are using. 
 
 # *insight API*
 
-*insight API* is an open-source bitcoin[PIVX] blockchain REST
+*insight API* is an open-source bitcoin[NPCcoin] blockchain REST
 and websocket API. Insight API runs in NodeJS and uses LevelDB for storage.
 
 This is a backend-only service. If you're looking for the web frontend application,
@@ -17,23 +17,23 @@ A blockchain explorer front-end has been developed on top of *Insight API*. It c
 be downloaded at [Github Insight Repository](https://github.com/bitpay/insight).
 
 ## Warning
-  Insight file sync does not work with **pivxd** 
+  Insight file sync does not work with **npccoind** 
   In order to use Insight you must set the environment variable INSIGHT_FORCE_RPC_SYNC = 1 
   Since file sync does not work the RPC sync is run on a timed interval every 60000 ms. This matches the interval at which new blocks are added to the network but it does leave the possibility of being up to 59 seconds behind the blockchain depending on what time the server was started at. 
 
 ## Prerequisites
 
-* **pivxd** - Download and Install [PIVX](https://pivx.org/wallet/)
+* **npccoind** - Download and Install [NPCcoin](https://npccoin.com/wallet/)
 
-*insight API* needs a *trusted* pivxd node to run. *insight API* will connect to the node
-through the RPC API, pivx peer-to-peer protocol, and will even read its raw block .dat files for syncing.
+*insight API* needs a *trusted* npccoind node to run. *insight API* will connect to the node
+through the RPC API, npccoin peer-to-peer protocol, and will even read its raw block .dat files for syncing.
 
-Configure pivxd to listen to RPC calls and set `txindex` to true.
-The easiest way to do this is by copying `./etc/pivxd/pivx.conf` to your
-bitcoin data directory (usually `~/.pivx` on Linux, `%appdata%\Pivx\` on Windows,
-or `~/Library/Application Support/Pivx` on Mac OS X).
+Configure npccoind to listen to RPC calls and set `txindex` to true.
+The easiest way to do this is by copying `./etc/npccoind/npccoin.conf` to your
+bitcoin data directory (usually `~/.npccoin` on Linux, `%appdata%\NPCcoin\` on Windows,
+or `~/Library/Application Support/NPCcoin` on Mac OS X).
 
-pivxd must be running and must have finished downloading the blockchain **before** running *insight API*.
+npccoind must be running and must have finished downloading the blockchain **before** running *insight API*.
 
 
 * **Node.js v0.10.x** - Download and Install [Node.js](http://www.nodejs.org/download/).
@@ -46,7 +46,7 @@ pivxd must be running and must have finished downloading the blockchain **before
 
   To install Insight API, clone the main repository:
 
-    $ git clone https://github.com/genitrust/insight-api-pivx && cd insight-api-pivx
+    $ git clone https://github.com/genitrust/insight-api-npccoin && cd insight-api-npccoin
 
   Install dependencies:
 
@@ -70,13 +70,13 @@ pivxd must be running and must have finished downloading the blockchain **before
 All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file. There you can specify your application name and database name. Certain configuration values are pulled from environment variables if they are defined:
 
 ```
-BITCOIND_HOST         # RPC pivxd host
-BITCOIND_PORT         # RPC pivxd Port
-BITCOIND_P2P_HOST     # P2P pivxd Host (will default to BITCOIND_HOST, if specified)
-BITCOIND_P2P_PORT     # P2P pivxd Port
+BITCOIND_HOST         # RPC npccoind host
+BITCOIND_PORT         # RPC npccoind Port
+BITCOIND_P2P_HOST     # P2P npccoind Host (will default to BITCOIND_HOST, if specified)
+BITCOIND_P2P_PORT     # P2P npccoind Port
 BITCOIND_USER         # RPC username
 BITCOIND_PASS         # RPC password
-BITCOIND_DATADIR      # pivxd datadir. 'testnet4' will be appended automatically if testnet is used. NEED to finish with '/'. e.g: `/vol/data/`
+BITCOIND_DATADIR      # npccoind datadir. 'testnet4' will be appended automatically if testnet is used. NEED to finish with '/'. e.g: `/vol/data/`
 INSIGHT_NETWORK [= 'livenet' | 'testnet']
 INSIGHT_PORT          # insight api port
 INSIGHT_DB            # Path where to store insight's internal DB. (defaults to $HOME/.insight)
@@ -104,7 +104,7 @@ In case the network is changed (testnet to livenet or vice versa) levelDB databa
 
 ## Synchronization
 
-The initial synchronization process scans the blockchain from the paired bitcoind server to update addresses and balances. *insight-api* needs exactly one trusted bitcoind node to run. This node must have finished downloading the blockchain before running *insight-api*.
+The initial synchronization process scans the blockchain from the paired bitcoind server to update addresses and balances. *insight-api-npccoin* needs exactly one trusted bitcoind node to run. This node must have finished downloading the blockchain before running *insight-api-npccoin*.
 
 While *insight* is synchronizing the website can be accessed (the sync process is embedded in the webserver), but there may be missing data or incorrect balances for addresses. The 'sync' status is shown at the `/api/sync` endpoint.
 
@@ -116,13 +116,13 @@ non-standard location is used, it needs to be defined (see the Configuration sec
 As of June 2014, using `.dat` files the sync process takes 9 hrs.
 for livenet and 30 mins. for testnet.
 
-While synchronizing the blockchain, *insight-api* listens for new blocks and
-transactions relayed by the bitcoind node. Those are also stored on *insight-api*'s database.
-In case *insight-api* is shutdown for a period of time, restarting it will trigger
+While synchronizing the blockchain, *insight-api-npccoin* listens for new blocks and
+transactions relayed by the bitcoind node. Those are also stored on *insight-api-npccoin*'s database.
+In case *insight-api-npccoin* is shutdown for a period of time, restarting it will trigger
 a partial (historic) synchronization of the blockchain. Depending on the size of
 that synchronization task, a reverse RPC or forward `.dat` syncing strategy will be used.
 
-If bitcoind is shutdown, *insight-api* needs to be stopped and restarted
+If bitcoind is shutdown, *insight-api-npccoin* needs to be stopped and restarted
 once bitcoind is restarted.
 
 ### Syncing old blockchain data manually
@@ -134,13 +134,13 @@ once bitcoind is restarted.
   Check util/sync.js --help for options, particulary -D to erase the current DB.
 
   *NOTE*: there is no need to run this manually since the historic synchronization
-  is built in into the web application. Running *insight-api* normally will trigger
+  is built in into the web application. Running *insight-api-npccoin* normally will trigger
   the historic sync automatically.
 
 
 ### DB storage requirement
 
-To store the blockchain and address related information, *insight-api* uses LevelDB.
+To store the blockchain and address related information, *insight-api-npccoin* uses LevelDB.
 Two DBs are created: txs and blocks. By default these are stored on
 
   ``~/.insight/``
@@ -160,7 +160,7 @@ To run the tests
 ```$ grunt test```
 
 
-Contributions and suggestions are welcome at [insight-api github repository](https://github.com/bitpay/insight-api).
+Contributions and suggestions are welcome at [insight-api-npccoin github repository](https://github.com/npccoin/insight-api-npccoin).
 
 ## Caching schema
 
