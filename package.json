@@ -37,9 +37,11 @@
     "bitcoin api",
     "blockchain api",
     "json",
-    "bitcore"
-    "npccoin"
-    "npc"
+    "bitcore",
+    "npccoin",
+    "npc",
+    "npccoincore"
+
   ],
   "engines": {
     "node": "*"
