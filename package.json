@@ -2,29 +2,19 @@
   "name": "insight-api-npccoin",
   "description": "An open-source bitcoin blockchain API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the bitcoin network and build your own services with it.",
   "version": "0.2.20",
-  "repository": "git://github.com/npccoin/insight-api-npccoin.git",
-  "contributors": [{
-    "name": "Estilodevida",
-    "email": "estilodevidanpc@gmail.com"
-  }, {
-    "name": "Matias Alejo Garcia",
-    "email": "ematiu@gmail.com"
-  }, {
-    "name": "Manuel Araoz",
-    "email": "manuelaraoz@gmail.com"
-  }, {
-    "name": "Mario Colque",
-    "email": "colquemario@gmail.com"
-  }, {
-    "name": "Gustavo Cortez",
-    "email": "cmgustavo83@gmail.com"
-  }, {
-    "name": "Juan Ignacio Sosa Lopez",
-    "email": "bechilandia@gmail.com"
-  }, {
-    "name": "Ivan Socolsky",
-    "email": "jungans@gmail.com"
-  }],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/npccoin/insight-api-npccoin.git"
+  },
+  "contributors": [
+    "Estilodevida <estilodevidanpc@gmail.com>",
+    "Matias Alejo Garcia <ematiu@gmail.com>",
+    "Manuel Araoz <manuelaraoz@gmail.com>",
+    "Mario Colque <colquemario@gmail.com>",
+    "Gustavo Cortez <cmgustavo83@gmail.com>",
+    "Juan Ignacio Sosa Lopez <bechilandia@gmail.com>",
+    "Ivan Socolsky <jungans@gmail.com>"
+  ],
   "bugs": {
     "url": "https://github.com/npccoin/insight-api-npccoin/issues"
   },
@@ -37,14 +27,17 @@
     "bitcoin api",
     "blockchain api",
     "json",
-    "bitcore"
-    "npccoin"
-    "npc"
+    "bitcore",
+    "npccoin",
+    "npc",
+    "npccoincore"
   ],
   "engines": {
     "node": "*"
   },
-  "bin": "insight.js",
+  "bin": {
+    "insight-api-npccoin": "insight.js"
+  },
   "scripts": {
     "start": "node insight.js"
   },
@@ -89,5 +82,12 @@
     "memdown": "^0.10.2",
     "should": "^2.1.1",
     "sinon": "^1.10.3"
-  }
+  },
+  "main": "Gruntfile.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "test"
+  },
+  "author": "NPCcoin Core Developers"
 }
